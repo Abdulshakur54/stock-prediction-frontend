@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import Button from "./Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";
 import axiosInstance from "../axiosInstance";
 
 const Header = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const location = useLocation();
   const handleLogout = async () => {
     try {
       await axiosInstance.post("logout/");
@@ -30,7 +30,11 @@ const Header = () => {
         <div>
           {isLoggedIn ? (
             <>
-              <Button text="Dashboard" class="btn-info" url="/dashboard" />
+              {location.pathname == "/dashboard" ? (
+                <Button text="Home" class="btn-info" url="/" />
+              ) : (
+                <Button text="Dashboard" class="btn-info" url="/dashboard" />
+              )}
               &nbsp;
               <button className="btn btn-danger" onClick={handleLogout}>
                 Logout

@@ -20,21 +20,18 @@ const Login = () => {
   const handleLogin = async (formData, resetForm) => {
     setLoading(true);
     try {
-      const response = await axiosInstance.post(
-        "token/", 
-        formData
-      );
-      
-      localStorage.setItem('csrfToken',response.data.csrfToken)
-      localStorage.setItem('loggedIn','true')
-      console.log("Login successful");
+      const response = await axiosInstance.post("token/", formData);
+
+      localStorage.setItem("csrfToken", response.data.csrfToken);
+      localStorage.setItem("loggedIn", "true");
       setIsLoggedIn(true);
       navigate("/dashboard");
     } catch (error) {
-      console.log(error)
-      localStorage.removeItem('loggedIn')
-      localStorage.removeItem('csrfToken')
-      setServerError("Invalid credentials");
+      if ((error.status === error.response.status) === 401) {
+        setServerError("Invalid credentials");
+        localStorage.removeItem("loggedIn");
+        localStorage.removeItem("csrfToken");
+      }
     } finally {
       setLoading(false);
     }
@@ -82,7 +79,9 @@ const Login = () => {
                   <ErrorMessage name="password" component="small" />
                 </div>
 
-                {serverError && <div className="text-danger">{serverError}</div>}
+                {serverError && (
+                  <div className="text-danger">{serverError}</div>
+                )}
 
                 {loading ? (
                   <button
