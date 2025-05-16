@@ -35,12 +35,10 @@ const Dashboard = () => {
       const response = await axiosInstance.post("/predict/", {
         ticker: data.ticker,
       });
-      console.log(response.data);
-      const backendRoot = import.meta.env.VITE_BACKEND_ROOT;
-      const plotUrl = `${backendRoot}${response.data.plot_img}`;
-      const ma100Url = `${backendRoot}${response.data.plot_100_dma}`;
-      const ma200Url = `${backendRoot}${response.data.plot_200_dma}`;
-      const predictionUrl = `${backendRoot}${response.data.plot_prediction}`;
+      const plotUrl = response.data.plot_img
+      const ma100Url = response.data.plot_100_dma
+      const ma200Url = response.data.plot_200_dma
+      const predictionUrl = response.data.plot_prediction
       setPlot(plotUrl);
       setMA100(ma100Url);
       setMA200(ma200Url);

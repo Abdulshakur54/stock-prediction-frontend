@@ -14,7 +14,6 @@ const Header = () => {
       localStorage.removeItem("loggedIn");
       localStorage.removeItem("csrfToken");
       setIsLoggedIn(false);
-      console.log("Logged out");
       navigate("/login");
     } catch (error) {
       console.log(error);

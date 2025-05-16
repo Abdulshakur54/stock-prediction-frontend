@@ -32,8 +32,7 @@ axiosInstance.interceptors.response.use(
   },
   // Handle failed responses
   async function (error) {
-    console.log('error')
-    console.log(error)
+
     if (["/protected/", "/login"].includes(error.config.url)) {
       const originalRequest = error.config;
       if (error.response.status === 401 && !originalRequest.retry) {
