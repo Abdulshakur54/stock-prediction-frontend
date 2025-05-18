@@ -7,7 +7,7 @@ import val from "../functions";
 
 import * as Yup from "yup";
 
-
+const baseURL = import.meta.env.VITE_BACKEND_BASE_API;
 const Register = () => {
  
   const [success, setSuccess] = useState(false);
@@ -18,7 +18,7 @@ const Register = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/register/",
+        `${baseURL}register/`,
         formData
       );
       setSuccess(true);
