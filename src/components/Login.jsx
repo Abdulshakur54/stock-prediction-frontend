@@ -27,7 +27,7 @@ const Login = () => {
       setIsLoggedIn(true);
       navigate("/dashboard");
     } catch (error) {
-      if ((error.status === error.response.status) === 401) {
+      if (error.status === 401) {
         setServerError("Invalid credentials");
         localStorage.removeItem("loggedIn");
         localStorage.removeItem("csrfToken");
