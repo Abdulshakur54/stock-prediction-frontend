@@ -10,10 +10,10 @@ const Header = () => {
   const location = useLocation();
   const handleLogout = async () => {
     try {
-      await axiosInstance.post("logout/");
       localStorage.removeItem("loggedIn");
       localStorage.removeItem("csrfToken");
       setIsLoggedIn(false);
+      await axiosInstance.post("logout/");
       navigate("/login");
     } catch (error) {
       console.log(error);
