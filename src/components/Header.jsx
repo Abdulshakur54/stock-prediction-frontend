@@ -10,7 +10,7 @@ const Header = () => {
   const location = useLocation();
   const handleLogout = async () => {
     try {
-      await axiosInstance.post("logout/");
+      // await axiosInstance.post("logout/");
       localStorage.removeItem("loggedIn");
       localStorage.removeItem("csrfToken");
       setIsLoggedIn(false);
