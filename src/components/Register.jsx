@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import val from "../functions";
+import {useNavigate} from 'react-router-dom'
 
 import * as Yup from "yup";
 
@@ -13,6 +14,7 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState('')
+  const navigate = useNavigate()
 
   const handleRegistration = async (formData, resetForm) => {
     setLoading(true);
@@ -24,6 +26,7 @@ const Register = () => {
       setSuccess(true);
       setServerError('')
       resetForm()
+      navigate("/login");
     } catch (error) {
       setSuccess(false)
       setServerError(JSON.stringify(error.response.data))
